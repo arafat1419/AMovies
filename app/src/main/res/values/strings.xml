@@ -1,0 +1,29 @@
+<resources>
+    <string name="app_name">AMovies</string>
+    <string name="tab_title_1">Movies</string>
+    <string name="tab_title_2">TV Shows</string>
+    <string name="tab_title_3">Favorites</string>
+
+    <string name="tab_title_movies">Movies</string>
+    <string name="tab_title_tv">Tv Shows</string>
+
+    <string name="image_poster_desc">Image Poster</string>
+    <string name="overview">Overview</string>
+    <string name="year">(%s)</string>
+    <string name="image_preview_desc">Image Preview</string>
+    <string name="splash_logo">Splash Logo</string>
+    <string name="credit">Credit by : Mohammad Arafat Maku</string>
+    <string name="score">User Score</string>
+    <string name="trailer">Trailer</string>
+    <string name="rating">%s%%</string>
+    <string name="search">Search</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="empty">DATA NOT FOUND</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="set_favorit">Set Favorit</string>
+    <string name="best_rating">Best Rating</string>
+    <string name="random">Random</string>
+    <string name="name">Name</string>
+    <string name="title_favorite">favorite</string>
+    <string name="title_search">search</string>
+</resources>

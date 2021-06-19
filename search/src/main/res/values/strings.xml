@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="search_hint">Enter Title</string>
+    <string name="searching">Searching</string>
+    <string name="search_desc">Now you can search almost every Movies and Tv Shows by Click Search menu at Top</string>
+    <string name="title_search">search</string>
+</resources>

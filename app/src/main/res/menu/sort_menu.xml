@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/action_best"
+            android:checked="true"
+            android:title="@string/best_rating" />
+        <item
+            android:id="@+id/action_name"
+            android:checked="false"
+            android:title="@string/name" />
+        <item
+            android:id="@+id/action_random"
+            android:checked="false"
+            android:title="@string/random" />
+
+    </group>
+</menu>
