@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import com.dicoding.sub1_made.R
 import com.dicoding.sub1_made.databinding.ContentDetailBinding
 import com.google.android.material.snackbar.Snackbar
@@ -27,6 +28,8 @@ class DetailActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ContentDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        window.decorView.setBackgroundColor(ContextCompat.getColor(this, R.color.bg_black))
 
         val id = intent.getIntExtra(EXTRA_ID, 0)
         val title = intent.getStringExtra(EXTRA_TITLE)

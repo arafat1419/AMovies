@@ -4,9 +4,6 @@
     <string name="tab_title_2">TV Shows</string>
     <string name="tab_title_3">Favorites</string>
 
-    <string name="tab_title_movies">Movies</string>
-    <string name="tab_title_tv">Tv Shows</string>
-
     <string name="image_poster_desc">Image Poster</string>
     <string name="overview">Overview</string>
     <string name="year">(%s)</string>
@@ -24,6 +21,4 @@
     <string name="best_rating">Best Rating</string>
     <string name="random">Random</string>
     <string name="name">Name</string>
-    <string name="title_favorite">favorite</string>
-    <string name="title_search">search</string>
 </resources>

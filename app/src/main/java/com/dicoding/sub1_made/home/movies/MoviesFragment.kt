@@ -116,7 +116,8 @@ class MoviesFragment : Fragment(), MovieCallback {
 
     private fun instantiateFragment(): Fragment? {
         return try {
-            Class.forName("com.sub1_made.search.movies.SearchMovieFragment").newInstance() as Fragment
+            Class.forName("com.sub1_made.search.movies.SearchMovieFragment")
+                .newInstance() as Fragment
         } catch (e: Exception) {
             Toast.makeText(context, "Module not found", Toast.LENGTH_SHORT).show()
             null
