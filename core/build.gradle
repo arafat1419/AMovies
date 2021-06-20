@@ -19,6 +19,10 @@ android {
 
         buildConfigField "String", "TMDB_API_KEY", "\"cebbae401ccc35130f7d637cea99dda7\""
         buildConfigField "String", "BASE_URL_TMDB", "\"https://api.themoviedb.org/3/\""
+        buildConfigField "String", "PASSPHARSE", "\"amovies\""
+        buildConfigField "String", "PINNER1", "\"sha256/+vqZVAzTqUP8BGkfl88yU7SQ3C8J2uNEa55B7RZjEg0=\""
+        buildConfigField "String", "PINNER2", "\"sha256/JSMzqOOrtyOT1kmau6zKhgT676hGgczD5VMdRMyJZFA=\""
+        buildConfigField "String", "PINNER3", "\"sha256/++MBgDH5WGvL9Bcn5Be30cRcL0f5O+NyoXuWtQdX1aI=\""
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
