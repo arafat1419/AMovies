@@ -3,8 +3,10 @@
 
 # How to use?
 replace with your own token at Gradle
-android {
-  defaultConfig {
-    buildConfigField "String", "TMDB_API_KEY", "\"Change your own token\""
-  }
-}
+android { <br>
+  defaultConfig {<br>
+    buildConfigField "String", "TMDB_API_KEY", "\"Change your own token\""<br>
+  }<br>
+}<br><br>
+
+and Rebuild Project
