@@ -17,7 +17,7 @@ android {
         versionCode 1
         versionName "1.0"
 
-        buildConfigField "String", "TMDB_API_KEY", "\"cebbae401ccc35130f7d637cea99dda7\""
+        buildConfigField "String", "TMDB_API_KEY", "\"Change your own token\""
         buildConfigField "String", "BASE_URL_TMDB", "\"https://api.themoviedb.org/3/\""
         buildConfigField "String", "PASSPHARSE", "\"amovies\""
         buildConfigField "String", "PINNER1", "\"sha256/+vqZVAzTqUP8BGkfl88yU7SQ3C8J2uNEa55B7RZjEg0=\""
