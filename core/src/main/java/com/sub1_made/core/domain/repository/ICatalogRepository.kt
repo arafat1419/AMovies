@@ -8,11 +8,11 @@ import com.sub1_made.core.domain.model.TvDomain
 import kotlinx.coroutines.flow.Flow
 
 interface ICatalogRepository {
-    fun getSearchMovies(query: String): LiveData<List<MovieDomain>>
+    fun getSearchMovies(query: String): Flow<List<MovieDomain>>
     fun getTrailerMovie(movieId: Int): LiveData<DataTrailer>
     fun getDetailSearchMovie(movieId: Int): LiveData<MovieDomain>
 
-    fun getSearchTvShows(query: String): LiveData<List<TvDomain>>
+    fun getSearchTvShows(query: String): Flow<List<TvDomain>>
     fun getTrailerTvShow(tvId: Int): LiveData<DataTrailer>
     fun getDetailSearchTvShows(tvShowId: Int): LiveData<TvDomain>
 

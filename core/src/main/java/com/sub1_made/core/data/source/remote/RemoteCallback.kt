@@ -6,14 +6,6 @@ import com.sub1_made.core.data.source.remote.response.TvResponse
 
 object RemoteCallback {
 
-    interface LoadSearchMovieCallback {
-        fun onSearchMovieReceived(searchMovieResponse: List<MovieResponse>)
-    }
-
-    interface LoadSearchTvCallback {
-        fun onSearchTvReceived(searchTvResponse: List<TvResponse>)
-    }
-
     interface LoadTrailerMovieCallback {
         fun onTrailerMovieReceived(movieTrailerResponse: List<TrailerResponse>)
     }

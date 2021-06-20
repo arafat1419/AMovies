@@ -9,7 +9,7 @@ import com.sub1_made.core.domain.repository.ICatalogRepository
 import kotlinx.coroutines.flow.Flow
 
 class CatalogInteractor(private val iCatalogRepository: ICatalogRepository) : CatalogUseCase {
-    override fun getSearchMovies(query: String): LiveData<List<MovieDomain>> =
+    override fun getSearchMovies(query: String): Flow<List<MovieDomain>> =
         iCatalogRepository.getSearchMovies(query)
 
     override fun getTrailerMovie(movieId: Int): LiveData<DataTrailer> =
@@ -18,7 +18,7 @@ class CatalogInteractor(private val iCatalogRepository: ICatalogRepository) : Ca
     override fun getDetailSearchMovie(movieId: Int): LiveData<MovieDomain> =
         iCatalogRepository.getDetailSearchMovie(movieId)
 
-    override fun getSearchTvShows(query: String): LiveData<List<TvDomain>> =
+    override fun getSearchTvShows(query: String): Flow<List<TvDomain>> =
         iCatalogRepository.getSearchTvShows(query)
 
     override fun getTrailerTvShow(tvId: Int): LiveData<DataTrailer> =

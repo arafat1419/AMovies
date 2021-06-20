@@ -12,16 +12,16 @@ import retrofit2.http.Query
 
 interface ApiService {
     @GET("search/movie")
-    fun getSearchMovie(
+    suspend fun getSearchMovie(
         @Query("query") query: String,
         @Query("api_key") apiKey: String = BuildConfig.TMDB_API_KEY
-    ): Call<ListResponse<MovieResponse>>
+    ): ListResponse<MovieResponse>
 
     @GET("search/tv")
-    fun getSearchTvShow(
+    suspend fun getSearchTvShow(
         @Query("query") query: String,
         @Query("api_key") apiKey: String = BuildConfig.TMDB_API_KEY
-    ): Call<ListResponse<TvResponse>>
+    ): ListResponse<TvResponse>
 
     @GET("movie/top_rated")
     suspend fun getTopRatedMovies(

@@ -2,7 +2,9 @@ package com.sub1_made.core.data.source
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.asFlow
 import androidx.lifecycle.map
+import com.sub1_made.core.data.model.DataTrailer
 import com.sub1_made.core.data.source.local.LocalDataSource
 import com.sub1_made.core.data.source.local.entity.MovieEntity
 import com.sub1_made.core.data.source.local.entity.TvEntity
@@ -17,8 +19,9 @@ import com.sub1_made.core.domain.model.TvDomain
 import com.sub1_made.core.domain.repository.ICatalogRepository
 import com.sub1_made.core.utils.DataMapper
 import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 
@@ -27,30 +30,24 @@ class CatalogRepository(
     private val localDataSource: LocalDataSource
 ) : ICatalogRepository {
 
-    override fun getSearchMovies(query: String): LiveData<List<MovieDomain>> {
-        val searchList = MutableLiveData<List<MovieEntity>>()
-        remoteDataSource.getSearchMovies(query, object : RemoteCallback.LoadSearchMovieCallback {
-            override fun onSearchMovieReceived(searchMovieResponse: List<MovieResponse>) {
-                val movieList = ArrayList<MovieEntity>()
-                for (i in searchMovieResponse) {
-                    val movie = MovieEntity(
-                        i.id,
-                        i.title,
-                        i.overview,
-                        i.poster,
-                        i.imgPreview,
-                        i.rating,
-                        i.releaseDate,
-                        false
+    override fun getSearchMovies(query: String): Flow<List<MovieDomain>> {
+        val movieEntity = MutableLiveData<List<MovieEntity>>()
+        CoroutineScope(IO).launch {
+            remoteDataSource.getSearchMovies(query).collect { response ->
+                when (response) {
+                    is ApiResponse.Empty -> movieEntity.postValue(listOf())
+                    is ApiResponse.Error -> response.errorMessage
+                    is ApiResponse.Success -> movieEntity.postValue(
+                        DataMapper.movieResponseToEntities(
+                            response.data
+                        )
                     )
-                    movieList.add(movie)
                 }
-                searchList.postValue(movieList)
             }
-        })
-        return searchList.map {
-            DataMapper.movieEntitiesToDomain(it)
         }
+        return movieEntity.map {
+            DataMapper.movieEntitiesToDomain(it)
+        }.asFlow()
     }
 
     override fun getListMovies(sort: String): Flow<Resource<List<MovieDomain>>> {
@@ -106,14 +103,14 @@ class CatalogRepository(
         }
     }
 
-    override fun getTrailerMovie(movieId: Int): LiveData<com.sub1_made.core.data.model.DataTrailer> {
-        val movieTrailer = MutableLiveData<com.sub1_made.core.data.model.DataTrailer>()
+    override fun getTrailerMovie(movieId: Int): LiveData<DataTrailer> {
+        val movieTrailer = MutableLiveData<DataTrailer>()
         remoteDataSource.getTrailerMovie(movieId, object : RemoteCallback.LoadTrailerMovieCallback {
-            var trailer = com.sub1_made.core.data.model.DataTrailer()
+            var trailer = DataTrailer()
             override fun onTrailerMovieReceived(movieTrailerResponse: List<TrailerResponse>) {
                 if (movieTrailerResponse.isNotEmpty())
                     trailer =
-                        com.sub1_made.core.data.model.DataTrailer(movieTrailerResponse[0].link.toString())
+                        DataTrailer(movieTrailerResponse[0].link.toString())
                 movieTrailer.postValue(trailer)
             }
         })
@@ -127,35 +124,27 @@ class CatalogRepository(
 
     override fun setFavMovie(movie: MovieDomain, state: Boolean) {
         val movieEntity = DataMapper.domainToMovieEntity(movie)
-        CoroutineScope(Dispatchers.IO).launch {
+        CoroutineScope(IO).launch {
             localDataSource.setFavMovie(movieEntity, state)
         }
     }
 
-    override fun getSearchTvShows(query: String): LiveData<List<TvDomain>> {
-        val searchList = MutableLiveData<List<TvEntity>>()
-        remoteDataSource.getSearchTvShows(query, object : RemoteCallback.LoadSearchTvCallback {
-            override fun onSearchTvReceived(searchTvResponse: List<TvResponse>) {
-                val tvList = ArrayList<TvEntity>()
-                for (i in searchTvResponse) {
-                    val movie = TvEntity(
-                        i.id,
-                        i.title,
-                        i.overview,
-                        i.poster,
-                        i.imgPreview,
-                        i.rating,
-                        i.releaseDate,
-                        false
-                    )
-                    tvList.add(movie)
+    override fun getSearchTvShows(query: String): Flow<List<TvDomain>> {
+        val tvEntity = MutableLiveData<List<TvEntity>>()
+        CoroutineScope(IO).launch {
+            remoteDataSource.getSearchTvShows(query).collect { response ->
+                when (response) {
+                    /*is ApiResponse.Empty ->
+                    is ApiResponse.Error -> response.errorMessage*/
+                    is ApiResponse.Success -> {
+                        tvEntity.postValue(DataMapper.tvResponseToEntities(response.data))
+                    }
                 }
-                searchList.postValue(tvList)
             }
-        })
-        return searchList.map {
-            DataMapper.tvEntitiesToDomain(it)
         }
+        return tvEntity.map {
+            DataMapper.tvEntitiesToDomain(it)
+        }.asFlow()
     }
 
     override fun getListTvShows(sort: String): Flow<Resource<List<TvDomain>>> =
@@ -210,14 +199,14 @@ class CatalogRepository(
         }
     }
 
-    override fun getTrailerTvShow(tvId: Int): LiveData<com.sub1_made.core.data.model.DataTrailer> {
-        val tvTrailer = MutableLiveData<com.sub1_made.core.data.model.DataTrailer>()
+    override fun getTrailerTvShow(tvId: Int): LiveData<DataTrailer> {
+        val tvTrailer = MutableLiveData<DataTrailer>()
         remoteDataSource.getTrailerTvShow(tvId, object : RemoteCallback.LoadTrailerTvCallback {
-            var trailer = com.sub1_made.core.data.model.DataTrailer()
+            var trailer = DataTrailer()
             override fun onTrailerTvReceived(tvTrailerResponse: List<TrailerResponse>) {
                 if (tvTrailerResponse.isNotEmpty())
                     trailer =
-                        com.sub1_made.core.data.model.DataTrailer(tvTrailerResponse[0].link.toString())
+                        DataTrailer(tvTrailerResponse[0].link.toString())
                 tvTrailer.postValue(trailer)
             }
         })
@@ -231,7 +220,7 @@ class CatalogRepository(
 
     override fun setFavTvShow(tvShow: TvDomain, state: Boolean) {
         val tvEntity = DataMapper.domainToTvEntity(tvShow)
-        CoroutineScope(Dispatchers.IO).launch {
+        CoroutineScope(IO).launch {
             localDataSource.setFavTvShow(tvEntity, state)
         }
     }

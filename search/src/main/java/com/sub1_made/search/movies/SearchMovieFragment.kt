@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.view.*
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
 import com.dicoding.sub1_made.detail.DetailActivity
 import com.sub1_made.core.domain.model.MovieDomain
@@ -16,9 +17,16 @@ import com.sub1_made.search.R
 import com.sub1_made.search.SearchViewModel
 import com.sub1_made.search.databinding.FragmentSearchBinding
 import com.sub1_made.search.di.searchModule
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers.IO
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.FlowPreview
+import kotlinx.coroutines.launch
 import org.koin.android.viewmodel.ext.android.viewModel
 import org.koin.core.context.loadKoinModules
 
+@ExperimentalCoroutinesApi
+@FlowPreview
 class SearchMovieFragment : Fragment(), MovieCallback {
 
     private var _binding: FragmentSearchBinding? = null
@@ -40,6 +48,7 @@ class SearchMovieFragment : Fragment(), MovieCallback {
 
         loadKoinModules(searchModule)
 
+        setSearch()
         setRecyclerView()
         setHasOptionsMenu(true)
     }
@@ -50,7 +59,6 @@ class SearchMovieFragment : Fragment(), MovieCallback {
             it.putExtra(DetailActivity.EXTRA_TYPE, "Movies")
             it.putExtra(DetailActivity.EXTRA_TITLE, data.title)
             it.putExtra(DetailActivity.EXTRA_SEARCH, true)
-
             context?.startActivity(it)
         }
     }
@@ -65,31 +73,39 @@ class SearchMovieFragment : Fragment(), MovieCallback {
         searchView.queryHint = resources.getString(R.string.search_hint)
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String): Boolean {
-                viewModel.getSearchMovies(query).observe(viewLifecycleOwner, {
-                    if (it.isNullOrEmpty()) {
-                        emptyData(true)
-                    } else {
-                        emptyData(false)
-                    }
-                    setRecyclerView()
-                    showLoading(false)
-                    binding?.rvSearch?.adapter.let { adapter ->
-                        when (adapter) {
-                            is MovieAdapter -> {
-                                adapter.setData(it)
-                            }
-                        }
-                    }
-                })
-                showLoading(true)
                 return true
             }
 
             override fun onQueryTextChange(query: String): Boolean {
                 binding?.arc?.visibility = View.GONE
+                CoroutineScope(IO).launch {
+                    viewModel.queryChannel.send(query)
+                }
+                showLoading(true)
                 return true
             }
         })
+    }
+
+    private fun setSearch() {
+        viewModel.movieResult.observe(viewLifecycleOwner, searchObserver)
+    }
+
+    private val searchObserver = Observer<List<MovieDomain>> {
+        if (it.isNullOrEmpty()) {
+            emptyData(true)
+        } else {
+            emptyData(false)
+        }
+        setRecyclerView()
+        showLoading(false)
+        binding?.rvSearch?.adapter.let { adapter ->
+            when (adapter) {
+                is MovieAdapter -> {
+                    adapter.setData(it)
+                }
+            }
+        }
     }
 
     private fun showLoading(state: Boolean) {

@@ -17,7 +17,6 @@
             android:layout_width="match_parent"
             android:layout_height="240dp"
             android:elevation="2dp"
-            app:arc_cropDirection="cropInside"
             app:arc_height="40dp"
             app:arc_position="bottom"
             app:layout_constraintEnd_toEndOf="parent"
@@ -28,7 +27,7 @@
                 android:id="@+id/img_prev"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@drawable/gradient"
+                android:foreground="@drawable/gradient"
                 android:contentDescription="@string/image_preview_desc"
                 android:scaleType="centerCrop"
                 tools:src="@tools:sample/avatars" />

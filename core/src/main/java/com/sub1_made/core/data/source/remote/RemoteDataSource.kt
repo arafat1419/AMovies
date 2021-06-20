@@ -15,28 +15,40 @@ import java.io.IOException
 
 class RemoteDataSource(private val apiService: ApiService) {
 
-    fun getSearchMovies(query: String, callback: RemoteCallback.LoadSearchMovieCallback) {
-        CoroutineScope(IO).launch {
+    suspend fun getSearchMovies(query: String): Flow<ApiResponse<List<MovieResponse>>> {
+        return flow {
             try {
-                apiService.getSearchMovie(query).await().result?.let {
-                    callback.onSearchMovieReceived(it)
+                val response = apiService.getSearchMovie(query)
+                val movieList = response.result
+                if (movieList != null) {
+                    if (movieList.isNotEmpty()) {
+                        emit(ApiResponse.Success(response.result))
+                    } else {
+                        emit(ApiResponse.Empty)
+                    }
                 }
-            } catch (e: IOException) {
-                e.printStackTrace()
+            } catch (e: Exception) {
+                emit(ApiResponse.Error(e.toString()))
             }
-        }
+        }.flowOn(IO)
     }
 
-    fun getSearchTvShows(query: String, callback: RemoteCallback.LoadSearchTvCallback) {
-        CoroutineScope(IO).launch {
+    fun getSearchTvShows(query: String): Flow<ApiResponse<List<TvResponse>>> {
+        return flow {
             try {
-                apiService.getSearchTvShow(query).await().result?.let {
-                    callback.onSearchTvReceived(it)
+                val response = apiService.getSearchTvShow(query)
+                val tvList = response.result
+                if (tvList != null) {
+                    if (tvList.isNotEmpty()) {
+                        emit(ApiResponse.Success(response.result))
+                    } else {
+                        emit(ApiResponse.Empty)
+                    }
                 }
-            } catch (e: IOException) {
-                e.printStackTrace()
+            } catch (e: Exception) {
+                emit(ApiResponse.Error(e.toString()))
             }
-        }
+        }.flowOn(IO)
     }
 
     suspend fun getTopRatedMovies(): Flow<ApiResponse<List<MovieResponse>>> {
