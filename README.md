@@ -1,5 +1,5 @@
 # SubmissionMadeDicoding 2
-[![arafat1419](https://circleci.com/gh/arafat1419/SubmissionMadeDicoding.svg?style=shield)](https://circleci.com/gh/arafat1419/SubmissionMadeDicoding)
+[![arafat1419](https://circleci.com/gh/arafat1419/AMovies.svg?style=shield)](https://circleci.com/gh/arafat1419/AMovies)
 
 # How to use?
 replace with your own token at Gradle <br>
