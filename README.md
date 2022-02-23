@@ -2,7 +2,7 @@
 [![arafat1419](https://circleci.com/gh/arafat1419/AMovies.svg?style=shield)](https://circleci.com/gh/arafat1419/AMovies)
 
 ## App Interface
-<img src="https://github.com/arafat1419/AMovies/blob/master/app_interface.png" />
+![amovies](https://user-images.githubusercontent.com/68770080/155264796-c8b79dac-d709-4cb3-8359-ebe8e7170233.png)
 
 ## Features
 * **Search :**  Search movies or tv shows by name
