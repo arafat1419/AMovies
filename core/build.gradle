@@ -17,10 +17,10 @@ android {
         versionCode 1
         versionName "1.0"
 
-        buildConfigField "String", "TMDB_API_KEY", "\"Change your own token\""
+        buildConfigField "String", "TMDB_API_KEY", "\"REPLACE_WITH_YOUR_API\""
         buildConfigField "String", "BASE_URL_TMDB", "\"https://api.themoviedb.org/3/\""
         buildConfigField "String", "PASSPHARSE", "\"amovies\""
-        buildConfigField "String", "PINNER1", "\"sha256/+vqZVAzTqUP8BGkfl88yU7SQ3C8J2uNEa55B7RZjEg0=\""
+        buildConfigField "String", "PINNER1", "\"sha256/oD/WAoRPvbez1Y2dfYfuo4yujAcYHXdv1Ivb2v2MOKk=\""
         buildConfigField "String", "PINNER2", "\"sha256/JSMzqOOrtyOT1kmau6zKhgT676hGgczD5VMdRMyJZFA=\""
         buildConfigField "String", "PINNER3", "\"sha256/++MBgDH5WGvL9Bcn5Be30cRcL0f5O+NyoXuWtQdX1aI=\""
 

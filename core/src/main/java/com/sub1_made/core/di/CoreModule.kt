@@ -37,9 +37,10 @@ val networkModule = module {
     single {
         val hostname = "api.themoviedb.org"
         val certificatePinner = CertificatePinner.Builder()
+            /*.add(hostname, "sha256/AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=")*/
             .add(hostname, BuildConfig.PINNER1)
-            .add(hostname, BuildConfig.PINNER1)
-            .add(hostname, BuildConfig.PINNER1)
+            .add(hostname, BuildConfig.PINNER2)
+            .add(hostname, BuildConfig.PINNER3)
             .build()
         OkHttpClient.Builder()
             .addInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))

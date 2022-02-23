@@ -1,4 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="11" project-jdk-type="JavaSDK" />
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/KULIAH/Bangkit Project/ILT/Project/Android Exprert/Sub1_Made/app/src/main/res/drawable/gradient.xml" value="0.26205128205128203" />
+        <entry key="..\:/KULIAH/Bangkit Project/ILT/Project/Android Exprert/Sub1_Made/app/src/main/res/drawable/ic_movies.xml" value="0.26614583333333336" />
+        <entry key="..\:/KULIAH/Bangkit Project/ILT/Project/Android Exprert/Sub1_Made/app/src/main/res/drawable/ic_tv_show.xml" value="0.26614583333333336" />
+        <entry key="..\:/KULIAH/Bangkit Project/ILT/Project/Android Exprert/Sub1_Made/app/src/main/res/layout/activity_home.xml" value="0.264" />
+        <entry key="..\:/KULIAH/Bangkit Project/ILT/Project/Android Exprert/Sub1_Made/app/src/main/res/layout/content_detail.xml" value="0.12158054711246201" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_13" project-jdk-name="11" project-jdk-type="JavaSDK" />
 </project>
