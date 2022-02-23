@@ -1,4 +1,4 @@
-# SubmissionMadeDicoding 2
+# AMovies
 [![arafat1419](https://circleci.com/gh/arafat1419/AMovies.svg?style=shield)](https://circleci.com/gh/arafat1419/AMovies)
 
 # How to use?
