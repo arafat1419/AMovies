@@ -34,6 +34,10 @@ ext {
     sqlite_version = "2.1.0"
     leakCanary_version = "2.6"
     lottie_version = "3.6.0"
+    bubble_navigation = "1.0.7"
+    circular_progress_bar = "3.0.3"
+    android_youtube_player = "10.0.5"
+    arc_layout = "1.0.5"
 }
 
 task clean(type: Delete) {
